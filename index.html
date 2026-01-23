@@ -1,177 +1,150 @@
 
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mini App</title>
-  <!-- Viewport más estricto para Telegram -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  
-  <!-- CSS específico para Telegram WebView -->
-  <style>
-    /* RESET completo para Telegram */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-    
-    body {
-      background-color: #111 !important;
-      width: 100vw;
-      height: 100vh;
-      min-height: -webkit-fill-available; /* Para Safari iOS */
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      position: fixed; /* Fijar para evitar scroll */
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-    
-    /* CONTENEDOR principal que llena TODO */
-    .container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    /* BOTÓN AZUL 3D - NUEVO ESTILO */
-    .telegram-btn {
-      /* Tamaño MÍNIMO muy grande */
-      width: 100%;
-      min-width: 300px;
-      height: 25vh; /* 25% del alto de la pantalla */
-      min-height: 120px;
-      
-      /* Para hacerlo incluso más grande en móviles */
-      max-height: 200px;
-      
-      /* Texto enorme */
-      font-size: min(10vw, 48px); /* Se adapta al ancho pero máximo 48px */
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      
-      /* COLORES AZULES Y 3D */
-      color: white; /* Letras blancas */
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      
-      /* Gradiente azul para el color principal */
-      background: linear-gradient(145deg, #0066CC, #004C99);
-      
-      /* Sombras y efectos 3D */
-      box-shadow: 
-        0 10px 0 #003366, /* Sombra base para el efecto 3D */
-        inset 0 4px 8px rgba(255, 255, 255, 0.3), /* Brillito superior interno */
-        0 6px 20px rgba(0, 0, 0, 0.4); /* Sombra difusa exterior */
-      
-      /* Espaciado interno */
-      padding: 25px 20px;
-      
-      /* Centrar contenido */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      
-      /* Transición para el efecto activo */
-      transition: all 0.1s ease-out;
-      
-      /* Para asegurar que sea táctil fácilmente */
-      touch-action: manipulation;
-    }
-    
-    /* Efecto activo (cuando se presiona el botón) */
-    .telegram-btn:active {
-      transform: translateY(8px); /* Mueve el botón hacia abajo */
-      box-shadow: 
-        0 2px 0 #003366, /* Reduce mucho la sombra base */
-        inset 0 2px 4px rgba(255, 255, 255, 0.2); /* Ajusta brillo interno */
-      background: linear-gradient(145deg, #004C99, #003366); /* Oscurece el gradiente */
-    }
-    
-    /* Para pantallas MÁS grandes (tablets, desktop) */
-    @media (min-width: 768px) {
-      .telegram-btn {
-        width: 80%;
-        max-width: 600px;
-        height: 150px;
-        font-size: min(5vw, 60px);
-        border-radius: 35px;
-      }
-    }
-    
-    /* Para móviles pequeños específicamente */
-    @media (max-width: 360px) {
-      .telegram-btn {
-        height: 140px;
-        min-height: 140px;
-        font-size: 36px;
-        border-radius: 20px;
-      }
-    }
-    
-    /* Para iPhones y Safari */
-    @supports (-webkit-touch-callout: none) {
-      body {
-        height: -webkit-fill-available;
-      }
-      .telegram-btn {
-        height: 22vh;
-        min-height: 130px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Solicitud de Acceso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- Script oficial de la API de Telegram para Web Apps -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        /* [Todo el CSS previo que tenías para el estilo del botón y la página] */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: #111;
+            width: 100vw;
+            height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .telegram-btn {
+            width: 100%;
+            min-width: 300px;
+            height: 25vh;
+            min-height: 120px;
+            max-height: 200px;
+            font-size: min(10vw, 48px);
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            background: linear-gradient(145deg, #007bff, #0056cc); /* Azul */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 
+                0 10px 30px rgba(0, 123, 255, 0.4),
+                0 4px 15px rgba(0, 0, 0, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            padding: 25px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            touch-action: manipulation;
+        }
+        .telegram-btn:active {
+            transform: scale(0.98);
+            box-shadow: 
+                0 5px 20px rgba(0, 123, 255, 0.3),
+                0 2px 10px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(145deg, #0056cc, #00409c);
+        }
+        @media (max-width: 480px) {
+            .telegram-btn {
+                height: 140px;
+                min-height: 140px;
+                font-size: 36px;
+                border-radius: 20px;
+            }
+        }
+        @media (min-width: 768px) {
+            .telegram-btn {
+                width: 80%;
+                max-width: 600px;
+                height: 150px;
+                font-size: min(5vw, 60px);
+                border-radius: 35px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <button class="telegram-btn" onclick="window.location.href='https://t.me/+hUWgO1P26_M0MGI5'">
-      Clic aquí para continuar 🚀
-    </button>
-  </div>
-  
-  <!-- Script opcional para forzar redimensionamiento en Telegram -->
-  <script>
-    // Forzar dimensiones en Telegram WebView
-    document.addEventListener('DOMContentLoaded', function() {
-      // Ajustar altura del botón dinámicamente
-      function adjustButtonSize() {
-        const btn = document.querySelector('.telegram-btn');
-        const viewportHeight = window.innerHeight;
-        
-        // Si la pantalla es muy pequeña, hacer botón más grande
-        if (viewportHeight < 700) {
-          btn.style.height = Math.max(140, viewportHeight * 0.25) + 'px';
-          btn.classList.add('giant-btn');
+    <div class="container">
+        <!-- Botón con texto aclaratorio y emoji -->
+        <button class="telegram-btn" id="mainButton">
+            📩 Abrir Telegram para enviar solicitud
+        </button>
+    </div>
+
+    <script>
+        // 1. Referencias a elementos y configuración
+        const mainButton = document.getElementById('mainButton');
+        const telegramLink = 'https://t.me/+hUWgO1P26_M0MGI5'; // Tu enlace de invitación al canal
+
+        // 2. Lógica principal: Detectar si el usuario REGRESA de la pantalla de Telegram
+        // Esta función verifica si el usuario acaba de volver de abrir el enlace externo.
+        function checkIfReturnedFromRedirect() {
+            // Intenta detectar si la página se cargó al volver de otra ventana/pestaña.
+            // Una señal común es que el 'referrer' (página anterior) sea nulo o la misma página,
+            // lo que ocurre a menudo en WebViews como la de Telegram al regresar.
+            // Si el rendimiento es del propio dominio o está vacío, asumimos un regreso.
+            const referrer = document.referrer;
+            const cameFromSameOrigin = referrer === '' || referrer.includes(window.location.origin);
+
+            // Otra señal: Si la página se carga de manera muy rápida y tiene el foco,
+            // podría ser porque el usuario volvió y la WebView la recargó.
+            // Esta no es una ciencia exacta, pero funciona bien en la práctica para este caso.
+            if (cameFromSameOrigin && document.visibilityState === 'visible') {
+                console.log('Posible regreso detectado. Cerrando la Mini App...');
+                // 3. Cerrar la Mini App usando la API de Telegram
+                // Esta es la línea clave que cierra la ventana de la aplicación dentro de Telegram.
+                if (window.Telegram && Telegram.WebApp) {
+                    Telegram.WebApp.close();
+                } else {
+                    // Fallback si por alguna razón no carga la API: al menos redirige fuera.
+                    console.warn('API de Telegram no encontrada. Redirigiendo a inicio.');
+                    window.location.href = 'https://t.me'; // Redirige al cliente principal de Telegram
+                }
+            }
         }
-        
-        // Asegurar que el botón sea táctil fácilmente
-        btn.style.minHeight = Math.max(120, viewportHeight * 0.2) + 'px';
-      }
-      
-      // Ajustar al cargar y al cambiar tamaño
-      adjustButtonSize();
-      window.addEventListener('resize', adjustButtonSize);
-      
-      // Prevenir zoom en iOS
-      document.addEventListener('touchmove', function(e) {
-        if(e.scale !== 1) e.preventDefault();
-      }, { passive: false });
-    });
-  </script>
+
+        // 4. Configurar el comportamiento del botón principal
+        mainButton.addEventListener('click', function() {
+            console.log('Botón presionado. Abriendo enlace de Telegram...');
+            // Abre el enlace del canal en la misma ventana/pestaña.
+            // Esto es crucial: al abrirse en la misma pestaña, Telegram mostrará su pantalla nativa
+            // (la segunda pantalla con la descripción del canal y "Solicitar unirse").
+            window.location.href = telegramLink;
+        });
+
+        // 5. Inicialización: Ejecutar la detección al cargar la página y al recibir el foco
+        // Verificamos al cargar si el usuario ya está regresando.
+        window.addEventListener('load', checkIfReturnedFromRedirect);
+        // También verificamos cuando la página vuelve a ser visible (el usuario regresa y cambia el foco).
+        document.addEventListener('visibilitychange', checkIfReturnedFromRedirect);
+    </script>
 </body>
 </html>
-
-
